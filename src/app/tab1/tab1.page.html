@@ -1,0 +1,70 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar color=tertiary>
+    <ion-title>
+      <ion-icon name="rainy"></ion-icon> Weather
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" style="overflow-y: hidden;" *ngIf="!currentLocation">
+<ion-button expand="block" (click)="getGeoLocation()" ><ion-icon name="refresh-circle" slot="start"></ion-icon>Refresh</ion-button>
+</ion-content>
+<ion-content [fullscreen]="true" style="overflow-y: hidden;" *ngIf="currentLocation">
+  <ion-card-header>
+    <ion-card-title>Weather Details</ion-card-title>
+    <ion-card-subtitle>{{currentLocation.name}}</ion-card-subtitle>
+    <p>{{currentLocation.region}}</p>
+    
+    <p>{{currentLocation.localtime | date: "dd/MM/yyyy HH:mm"}}</p>
+
+    <ion-button expand="block" (click)="getLocationCoordinates()" ><ion-icon name="refresh-circle" slot="start"></ion-icon>Refresh</ion-button>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item >
+      <ion-icon name="thermometer-outline" slot="start"></ion-icon>
+      <ion-label>Temperature: {{currentWeather.temp_c}} ℃</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="thermometer-outline" slot="start"></ion-icon>
+      <ion-label>Temperature: {{currentWeather.temp_f}} ℉</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-img class="weather-icon" [src]="currentWeather.condition.icon" slot="start"></ion-img>
+      <ion-label>Condition: {{currentWeather.condition.text}}</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="cloudy-night-outline" slot="start"></ion-icon>
+      <ion-label>Feels like: {{currentWeather.feelslike_c}} ℃</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="cloudy-outline" slot="start"></ion-icon>
+      <ion-label>Humidity: {{currentWeather.humidity}}</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="sunny-outline" slot="start"></ion-icon>
+      <ion-label>UV: {{currentWeather.uv}}</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="arrow-forward-circle-outline" slot="start"></ion-icon>
+      <ion-label>Wind Degree: {{currentWeather.wind_degree}}</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="compass-outline" slot="start"></ion-icon>
+      <ion-label>Wind Direction: {{currentWeather.wind_dir}}</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-icon name="time-outline" slot="start"></ion-icon>
+      <ion-label>Last Updated: {{currentWeather.last_updated | date: "dd/MM/yyyy HH:mm"}}</ion-label>
+    </ion-item>
+    <small>Data Provided by api.weatherapi.com</small>
+  </ion-card-content>
+  <!-- <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="openNavDetailsPage(item)" icon-start>
+      <ion-icon [name]="'logo-' + item.icon" [ngStyle]="{'color': item.color}" item-start></ion-icon>
+      {{ item.title }}
+    </button>
+  </ion-list> -->
+
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "icloudy-weather-app-199d7",
+    "icloudweather": "icloudweather",
+    "icloudy": "cloudweather-b7d84"
+  }
+}

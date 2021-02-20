@@ -1,0 +1,75 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar color=tertiary>
+    <ion-title>
+      <ion-icon name="cloud-done-outline"></ion-icon> Forecast
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" style="overflow-y: hidden;" *ngIf="!currentLocation">
+<ion-button expand="block" (click)="getGeoLocation()" ><ion-icon name="refresh-circle" slot="start"></ion-icon>Refresh</ion-button>
+</ion-content>
+<ion-content [fullscreen]="true" style="overflow-y: hidden;" *ngIf="currentLocation">
+  <ion-card-header>
+    <ion-card-title>Forecast Details</ion-card-title>
+    <ion-card-subtitle>{{currentLocation.name}}</ion-card-subtitle>
+    <p>{{currentLocation.region}}</p>
+    <p>{{currentLocation.localtime | date: "dd/MM/yyyy HH:mm"}}</p>
+
+  </ion-card-header>
+  <ion-card *ngFor="let item of forecastWeather">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="item.day.condition.icon">
+      </ion-avatar>
+      <!-- <h2 text-capitalize>
+        {{item.date}}
+      </h2> -->
+      <p text-capitalize>
+        {{item.date | date: "dd/MM/yyyy"}} | {{item.day.condition.text}} 
+      </p>
+      <!-- <small> <ion-datetime displayFormat="DD/MM/YYYY" value=></ion-datetime></small>
+       -->
+    </ion-item>
+  
+    <ion-card-content>
+      <h2>Avg temp: {{item.day.avgtemp_c}} ℃ </h2>
+      <h3>Max temp: {{item.day.maxtemp_c}} ℃</h3>
+      <h3>Min temp: {{item.day.mintemp_c}} ℃</h3>
+      <p>Chance of rain: {{item.day.daily_will_it_rain ===1 ? 'Yes':'No'}}</p>
+      <p>Chance of rain: {{item.day.daily_chance_of_rain}}%</p>
+      <p>Chance of snow: {{item.day.daily_will_it_snow ==='1' ? 'Yes':'No'}}</p>
+      <p>Daily chance of rain: {{item.day.daily_chance_of_snow}}%</p>
+      <p>Sunrise: {{item.astro.sunrise}}</p>
+      <p>Sunset: {{item.astro.sunset}}</p>
+    </ion-card-content>
+  
+  
+  </ion-card>
+  <small>Data Provided by api.weatherapi.com</small>
+    <!-- <ion-list *ngFor="let item of forecastWeather">
+      <ion-list-header>
+        {{item.date}} ({{item.day.condition.text}})
+      </ion-list-header>
+      <ion-item >
+        
+          <ion-img class="weather-icon" [src]="item.day.condition.icon" slot="start"></ion-img>
+   
+        <ion-label>
+          <h2>Avg temp: {{item.day.avgtemp_c}} ℃ </h2>
+          <h3>Max temp: {{item.day.maxtemp_c}} ℃</h3>
+          <h3>Min temp: {{item.day.mintemp_c}} ℃</h3>
+          <p>Chance of rain: {{item.day.daily_will_it_rain ===1 ? 'Yes':'No'}}</p>
+          <p>Chance of rain: {{item.day.daily_chance_of_rain}}%</p>
+          <p>Chance of snow: {{item.day.daily_will_it_snow ==='1' ? 'Yes':'No'}}</p>
+          <p>Daily chance of rain: {{item.day.daily_chance_of_snow}}%</p>
+          <p>Sunrise: {{item.astro.sunrise}}</p>
+          <p>Sunset: {{item.astro.sunset}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <p>Data Provided by api.weatherapi.com</p> -->
+<!--   
+    <ion-button expand="block" (click)="getLocationCoordinates()" ><ion-icon name="refresh-circle" slot="start">
+    </ion-icon>Refresh</ion-button>  -->
